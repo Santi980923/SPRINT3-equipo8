@@ -11,7 +11,7 @@ email_origen=""
 
 @app.route("/")
 def Inicio():
-    return render_template("login.html")
+    return render_template("login.php")
 
 @app.route("/validarUsuario",methods=["GET","POST"])
 def validarUsuario():
@@ -31,14 +31,14 @@ def validarUsuario():
         if len(respuesta)==0:
             email_origen=""
             mensaje="ERROR DE AUTENTICACION !!!verifique su usuario y contraseña"
-            return render_template("informacion.html",data=mensaje)
+            return render_template("informacion.php",data=mensaje)
         else:
         #print("usuario= "+usu)
         #print("password= "+passw)
         #print("pasw encriptado="+passw2)
             email_origen=usu
             respuesta2=controlador.listaDestinarios(usu)
-            return render_template("principal.html",data=respuesta2)
+            return render_template("principal.php",data=respuesta2)
 
 
 @app.route("/registrarUsuario",methods=["GET","POST"])
@@ -66,7 +66,7 @@ def registrarUsuario():
         respuesta=controlador.registrarUsuario(nombreusuario,correo,passw2,code2)
 
         #mensaje="Usuario"+nombreusuario+" registrado satisfactoriamente."
-        return render_template("informacion.html",data=respuesta)
+        return render_template("informacion.php",data=respuesta)
 
 
 @app.route("/enviarMail",methods=["GET","POST"])
@@ -110,15 +110,15 @@ def activarUsuario():
             mensaje="Codigo de activacion erroneo,reviselo"
         else:
             mensaje="Codigo de activacion correcto,usuario activado."
-        return render_template("informacion.html",data=mensaje)
+        return render_template("informacion.php",data=mensaje)
 
 @app.route("/historialEnviados",methods=["GET","POST"])
 def historialEnviados():
         resultado=controlador.ver_Enviados(email_origen)
-        return render_template("respuesta.html",data=resultado)
+        return render_template("respuesta.php",data=resultado)
     
 @app.route("/historialRecibidos",methods=["GET","POST"])
 def historialRecibidos():
         resultado=controlador.ver_recibidos(email_origen)
-        return render_template("respuesta.html",data=resultado)
+        return render_template("respuesta.php",data=resultado)
 
