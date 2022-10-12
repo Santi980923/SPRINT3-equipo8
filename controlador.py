@@ -69,7 +69,7 @@ def registrarUsuario(usuario,email,passwd,code):
      
     except :
         return "ERROR,usuario y/o correo ya existentes por favor revise sus credenciales"
-         
+       
        
 
 def activarUsuario(codigo):
@@ -78,9 +78,7 @@ def activarUsuario(codigo):
     cursor=db.cursor()
     consulta="update usuarios set estado='1' where codigoactivacion='"+codigo+"'"
     cursor.execute(consulta)
-    db.commit()
-
-    
+    db.commit()    
     consulta2="select * from usuarios where codigoactivacion='"+codigo+"'and estado='1'"
     cursor.execute(consulta2)
     resultado=cursor.fetchall()

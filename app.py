@@ -45,11 +45,11 @@ def validarUsuario():
 def registrarUsuario():
     if request.method=="POST":
         nombreusuario=request.form["txtnombre"]
-        nombreusuario=nombreusuario.usu.replace("SELECT","").replace("INSERT","").replace("DELETE","").replace("UPDATE","").replace("WHERE","")
+        nombreusuario=nombreusuario.replace("SELECT","").replace("INSERT","").replace("DELETE","").replace("UPDATE","").replace("WHERE","")
         correo=request.form["txtusuarioregistro"]
         correo=correo.replace("SELECT","").replace("INSERT","").replace("DELETE","").replace("UPDATE","").replace("WHERE","")
         passw=request.form["txtpassregistro"]
-        passw=passw.usu.replace("SELECT","").replace("INSERT","").replace("DELETE","").replace("UPDATE","").replace("WHERE","")
+        passw=passw.replace("SELECT","").replace("INSERT","").replace("DELETE","").replace("UPDATE","").replace("WHERE","")
         passw2=passw.encode()
         passw2=hashlib.sha384(passw2).hexdigest()
 
@@ -63,7 +63,6 @@ def registrarUsuario():
 
         mensaje="Señor@, usuario su codigo de activacion es :\n\n"+code2+ "\n\n Recuerde copiarlo y pegarlo para validarlo en la seccion de login y activar su cuenta.\n\nMuchas Gracias"
         Sendemail.enviar(correo,mensaje,"Codigo de Activacion")
-
         respuesta=controlador.registrarUsuario(nombreusuario,correo,passw2,code2)
 
         #mensaje="Usuario"+nombreusuario+" registrado satisfactoriamente."
